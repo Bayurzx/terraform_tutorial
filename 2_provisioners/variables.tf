@@ -14,7 +14,10 @@ variable "vpc_id" {
   type = string
 }
 
+<<<<<<< HEAD
 variable "ami_aws" {
   type = string
 }
 
+=======
+>>>>>>> dd3c6eb (About to switch to main)
