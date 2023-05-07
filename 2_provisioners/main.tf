@@ -37,11 +37,12 @@ data "template_file" "user_data" {
 
 
 resource "aws_instance" "myEc2Demo" {
-  ami           = "ami-007855ac798b5175e" # Ubuntu Linux in us-east-1, update as per your region
+  ami           = var.ami_aws # Ubuntu Linux in us-east-1, update as per your region
   instance_type = var.instance_type
   key_name = "${aws_key_pair.SSH_to_ec2.key_name}"
   vpc_security_group_ids = [ aws_security_group.sg_myEc2Demo.id ]
-  user_data = data.template_file.user_data.rendered
+  # user_data = data.template_file.user_data.rendered
+  user_data = file("userdata.yaml")
 
   tags = {
     name = "MyEc2Nano"
@@ -72,7 +73,7 @@ resource "aws_security_group" "sg_myEc2Demo" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = ["105.112.30.140/32"]
+    cidr_blocks      = ["105.112.154.83/32"]
     # ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
   }
 

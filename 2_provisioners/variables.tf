@@ -14,3 +14,7 @@ variable "vpc_id" {
   type = string
 }
 
+variable "ami_aws" {
+  type = string
+}
+
