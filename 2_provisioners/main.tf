@@ -1,4 +1,5 @@
 terraform {
+  /*
   cloud {
     organization = "iglumtech"
 
@@ -6,6 +7,7 @@ terraform {
       name = "Providers"
     }
   }
+  */
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -41,7 +43,10 @@ resource "aws_instance" "myEc2Demo" {
   key_name = "${aws_key_pair.SSH_to_ec2.key_name}"
   vpc_security_group_ids = [ aws_security_group.sg_myEc2Demo.id ]
   # user_data = data.template_file.user_data.rendered
-  user_data = file("userdata.yaml")
+  user_data = data.template_file.user_data.rendered
+  provisioner "local-exec" {
+    command = "echo ${self.private_ip} >> private_ips.txt"
+  }
 
   tags = {
     name = "MyEc2Nano"
