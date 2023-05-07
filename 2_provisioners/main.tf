@@ -6,7 +6,6 @@ terraform {
       name = "Providers"
     }
   }
-
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -65,7 +64,10 @@ resource "aws_security_group" "sg_myEc2Demo" {
     to_port          = 80
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
-    # ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
+    ipv6_cidr_blocks = [ ]
+    prefix_list_ids = [  ]
+    security_groups = [  ]
+    self = false
   }
 
   ingress {
@@ -74,7 +76,10 @@ resource "aws_security_group" "sg_myEc2Demo" {
     to_port          = 22
     protocol         = "tcp"
     cidr_blocks      = ["105.112.154.83/32"]
-    # ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
+    ipv6_cidr_blocks = []
+    prefix_list_ids = [  ]
+    security_groups = [  ]
+    self = false
   }
 
   egress { # By default we do not allow egress.
@@ -83,6 +88,9 @@ resource "aws_security_group" "sg_myEc2Demo" {
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
+    prefix_list_ids = [  ]
+    security_groups = [  ]
+    self = false
   }
 
 }
