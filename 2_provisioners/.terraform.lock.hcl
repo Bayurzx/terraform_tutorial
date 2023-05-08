@@ -24,8 +24,6 @@ provider "registry.terraform.io/hashicorp/aws" {
   ]
 }
 
-<<<<<<< HEAD
-=======
 provider "registry.terraform.io/hashicorp/external" {
   version = "2.3.1"
   hashes = [
@@ -45,7 +43,6 @@ provider "registry.terraform.io/hashicorp/external" {
   ]
 }
 
->>>>>>> dd3c6eb (About to switch to main)
 provider "registry.terraform.io/hashicorp/template" {
   version = "2.2.0"
   hashes = [
