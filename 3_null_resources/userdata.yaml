@@ -1,0 +1,29 @@
+#cloud-config
+
+# Install updates
+package_upgrade: true
+
+# Install Apache
+packages:
+  - apache2
+  
+write_files:
+  - content: |
+      <html>
+        <head>
+          <title>Welcome to My Website</title>
+        </head>
+        <body>
+          <h1>Hello World!</h1>
+          <p>This is my first website running on an EC2 instance.</p>
+          <p>IP address: $private_ipv4</p>
+        </body>
+      </html>
+    path: /var/www/html/index.html
+    owner: www-data:www-data
+    permissions: '0644'
+
+runcmd:
+  - systemctl start apache2
+  - systemctl enable apache2
+  - systemctl status apache2 > /tmp/apache_status.txt
