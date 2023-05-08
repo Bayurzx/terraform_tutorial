@@ -1,0 +1,28 @@
+# #cloud-config
+# packages: 
+#   - httpd
+
+# runcmd:
+#   - systemctl start httpd
+#   - sudo systemctl enable httpd
+
+#cloud-config
+package_upgrade: true
+packages:
+  - apache2
+write_files:
+  - content: |
+      <html>
+        <head>
+          <title>Welcome to My Website</title>
+        </head>
+        <body>
+          <h1>Hello World!</h1>
+          <p>This is my first website running on an EC2 instance.</p>
+          <p>IP address: $private_ipv4</p>
+        </body>
+      </html>
+    path: /var/www/html/index.html
+runcmd:
+  - systemctl start apache2
+  - systemctl enable apache2
